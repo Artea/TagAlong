@@ -1,0 +1,8 @@
+COLOR PALLETTE:
+Colors{
+	black:#343844;
+	teal:#2ab69d;
+	red:#e65848;
+	yellow:#fdc536;
+	white:#fcf2d7;
+}
