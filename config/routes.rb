@@ -1,4 +1,6 @@
 Tagalong::Application.routes.draw do
+  resources :events
+
   devise_for :users
   root "pages#home"
   get "about" => "pages#about"
