@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<h1>
   <strong>Name:</strong>
   <%= @event.name %>
-</p>
+</h1>
 
 <p>
   <strong>Description:</strong>
@@ -13,6 +13,11 @@
 <p>
   <strong>When:</strong>
   <%= @event.when %>
+</p>
+
+<p>
+  <strong>Where:</strong>
+  <%= @event.where %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

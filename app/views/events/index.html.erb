@@ -1,12 +1,26 @@
 <h1>Listing events</h1>
 <% @events.each do |event| %>
   <div class='box panel panel-default'>
+    <div class='panel-heading'>
+      <h2><strong><%= event.name %></strong></h2>
+    </div>
     <div class='panel-body'>
-      <%= event.name %><br/>
-      <%= event.description %><br/>
-      <%= event.when %><br/>
+      <ul class='list-group'>
+        <li class='list-group-item'>
+          <strong>Description:</strong>
+          <%= event.description %>
+        </li>
+        <li class='list-group-item'>
+          <strong>When:</strong>
+          <%= event.when %>
+        </li>
+        <li class='list-group-item'>
+          <strong>Where:</strong>
+          <%= event.where %>
+        </li>
       <%event.user.email if event.user%>
       <% if event.user == current_user %>
+    </ul>
         <div class='actions'>
           <%= link_to edit_event_path(event) do %>
             <span class='glyphicon glyphicon-edit'></span> Edit
@@ -16,6 +30,7 @@
           Delete
           <% end %>
         </div>
+      <% else %>
       <% end %>
     </div>
   </div>

@@ -30,8 +30,6 @@ gem 'devise'
 
 gem "chronic", "~> 0.10.2"
 
-gem 'bootstrap-datetimepicker-rails'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
