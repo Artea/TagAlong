@@ -1,31 +1,22 @@
 <h1>Listing events</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.description %></td>
-        <td><%= event.name %></td>
-        <td><%= event.type %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Event', new_event_path %>
+<% @events.each do |event| %>
+  <div class='box panel panel-default'>
+    <div class='panel-body'>
+      <%= event.name %><br/>
+      <%= event.description %><br/>
+      <%= event.when %><br/>
+      <%event.user.email if event.user%>
+      <% if event.user == current_user %>
+        <div class='actions'>
+          <%= link_to edit_event_path(event) do %>
+            <span class='glyphicon glyphicon-edit'></span> Edit
+          <% end %>
+          <%= link_to event, method: :delete, data: { confirm: 'Are you sure?'} do %>
+          <span class = 'glyphicon glyphicon-trash'></span>
+          Delete
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

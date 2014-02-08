@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_field :description, class: "form-control" %>
-  </div>
-  <div class="form-group">
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :type %><br>
-    <%= f.text_field :type, class: "form-control" %>
+    <%= f.label :description %><br>
+    <%= f.text_field :description, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.submit %>
+    <%= f.label :when %><br>
+    <%= f.datetime_field :when %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

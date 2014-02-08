@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
   <strong>Name:</strong>
   <%= @event.name %>
 </p>
 
 <p>
-  <strong>Type:</strong>
-  <%= @event.type %>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>When:</strong>
+  <%= @event.when %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
