@@ -79,5 +79,5 @@ Tagalong::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   #Note to set this to actual host
-  config.action_mailer.default_url_options = { :host => 'localhost:3000'}
+  config.action_mailer.default_url_options = { :host => 'http://tag-along.herokuapp.com/'}
 end
