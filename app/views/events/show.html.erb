@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>
   <strong>Name:</strong>
@@ -29,6 +29,7 @@
         <%= @determine ? 'Remove from Events'.html_safe : 'Add to Events'.html_safe %>
 </div>
 
+<p><strong><%= @event.user.email if @event.user %></strong></p>
 <% if @event.user == current_user %>
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <% end %>

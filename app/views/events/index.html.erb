@@ -18,18 +18,16 @@
           <strong>Where:</strong>
           <%= event.where %>
         </li>
-      <% event.user.email if event.user %>
-      <% if event.user == current_user %>
-    </ul>
+      </ul>
+      <% if event.user == current_user %> 
         <div class='actions'>
           <%= link_to edit_event_path(event) do %>
             <span class='glyphicon glyphicon-edit'></span> Edit
           <% end %>
           <%= link_to event, method: :delete, data: { confirm: 'Are you sure?'} do %>
-          <span class = 'glyphicon glyphicon-trash'></span> Delete
+            <span class = 'glyphicon glyphicon-trash'></span> Delete
           <% end %>
         </div>
-      <% else %>
       <% end %>
     </div>
   </div>
