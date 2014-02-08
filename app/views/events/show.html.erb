@@ -20,5 +20,58 @@
   <%= @event.where %>
 </p>
 
+<div class="
+        btn 
+        btn-xs
+        <%= @determine ? 'Remove' : 'Add' %> 
+        <%= @determine ? 'btn-danger' : 'btn-success' %>
+      ">
+        <%= @determine ? 'Remove from Events'.html_safe : 'Add to Events'.html_safe %>
+</div>
+
+<% if @event.user == current_user %>
 <%= link_to 'Edit', edit_event_path(@event) %> |
+<% end %>
 <%= link_to 'Back', events_path %>
+
+<script>
+  $('.Add').click(function(){
+    var $this = $(this);
+    var accept = "<%= accept_event_path(@event) %>";
+    var remove = "<%= remove_event_path(@event) %>";
+    var addtext = 'Add to Events';
+    var removetext = 'Remove from Events';
+    $this.toggleClass('Add');
+    if($this.hasClass('Add')){
+      $this.text(addtext);
+      $this.removeClass('btn-danger');
+      $this.addClass('btn-success');
+      $.ajax({type: "GET", url: remove});
+    } else {
+      $this.text(removetext);
+      $this.removeClass('btn-success');
+      $this.addClass('btn-danger');
+      $.ajax({type: "GET", url: accept});
+    }
+  });
+
+    $('.Remove').click(function(){
+    var $this = $(this);
+    var accept = "<%= remove_event_path(@event) %>"
+    var remove = "<%= accept_event_path(@event) %>"
+    var addtext = 'Add to Events';
+    var removetext = 'Remove from Events';
+    $this.toggleClass('Add');
+    if($this.hasClass('Add')){
+      $this.text(addtext);
+      $.ajax({type: "GET", url: accept});
+      $this.removeClass('btn-danger');
+      $this.addClass('btn-success');
+    } else {
+      $this.text(removetext);
+      $this.removeClass('btn-success');
+      $this.addClass('btn-danger');
+      $.ajax({type: "GET", url: remove});
+    }
+  });
+</script>

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:remove, :accept, :show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /events
   # GET /events.json
@@ -10,11 +11,23 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @determine = current_user.events.include? @event
+  end
+
+  def accept
+    @event.users << current_user
+    render nothing: true
+  end
+
+  def remove
+    @user = current_user
+    @user.events.delete(@event)
+    render nothing: true
   end
 
   # GET /events/new
   def new
-    @event = current_user.events.build
+    @event = Event.new
   end
 
   # GET /events/1/edit
@@ -24,13 +37,15 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = current_user.events.build(event_params)
+    @event = Event.new(event_params)
 
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @event }
       else
         format.html { render action: 'new' }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,7 +55,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'event was successfully updated.' }
+        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -63,11 +78,6 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
-    end
-
-    def correct_user
-      @event = current_user.events.find_by(id: params[:id])
-      redirect_to events_path, notice: "Not authorized to edit this event" if @event.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

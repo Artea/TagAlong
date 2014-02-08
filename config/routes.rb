@@ -1,9 +1,14 @@
 Tagalong::Application.routes.draw do
-  resources :events
+  resources :events do
+    get 'accept', on: :member
+    get 'remove', on: :member
+  end
 
   devise_for :users
   root "pages#home"
+  get "dashboard" => "pages#dashboard"
   get "about" => "pages#about"
+  get "events" => "events#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

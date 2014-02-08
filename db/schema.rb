@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 20140208120022) do
   add_index "events", ["user_bool"], name: "index_events_on_user_bool"
   add_index "events", ["user_id"], name: "index_events_on_user_id"
 
+  create_table "events_users", id: false, force: true do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
