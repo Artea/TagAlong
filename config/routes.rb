@@ -1,7 +1,12 @@
 Tagalong::Application.routes.draw do
-  resources :events do
+  
+  resources :attendees do
     get 'accept', on: :member
     get 'remove', on: :member
+  end  
+
+  resources :events do
+    resources :attendees
   end
 
   devise_for :users

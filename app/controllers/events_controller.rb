@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:remove, :accept, :show, :edit, :update, :destroy]
+  before_action :set_attendee, only: [:accept, :remove, :show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_filter :authenticate_user!
 
@@ -7,12 +8,13 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    @attendees = Attendee.all
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
-    @determine = current_user.events.include? @event
+    @determine = current_user.attendees.include? @attendee
   end
 
   def accept
@@ -29,6 +31,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = current_user.events.build
+    @attendee = current_user.attendees.build
   end
 
   # GET /events/1/edit
@@ -39,6 +42,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = current_user.events.build(event_params)
+    @attendee = current_user.attendees.build(attendee_params)
 
     respond_to do |format|
       if @event.save
@@ -68,17 +72,22 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    @attendee.destroy
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :no_content }
-    end
+    end   
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def set_attendee
+      @attendee = Attendee.find(params[:id])
     end
 
     def correct_user
@@ -89,5 +98,9 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:description, :name, :when, :where)
+    end
+
+    def attendee_params
+      params[:attendee]
     end
 end

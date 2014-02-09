@@ -38,8 +38,8 @@
 <script>
   $('.Add').click(function(){
     var $this = $(this);
-    var accept = "<%= accept_event_path(@event) %>";
-    var remove = "<%= remove_event_path(@event) %>";
+    var accept = "<%= accept_attendee_path(@attendee) %>";
+    var remove = "<%= remove_attendee_path(@attendee) %>";
     var addtext = 'Add to Events';
     var removetext = 'Remove from Events';
     $this.toggleClass('Add');
@@ -58,8 +58,8 @@
 
     $('.Remove').click(function(){
     var $this = $(this);
-    var accept = "<%= remove_event_path(@event) %>"
-    var remove = "<%= accept_event_path(@event) %>"
+    var accept = "<%= remove_attendee_path(@attendee) %>"
+    var remove = "<%= accept_attendee_path(@attendee) %>"
     var addtext = 'Add to Events';
     var removetext = 'Remove from Events';
     $this.toggleClass('Add');

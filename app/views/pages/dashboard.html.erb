@@ -1,23 +1,9 @@
 <% if user_signed_in? %>
-	<% if current_user.events.empty? %>
+	<% if current_user.attendees.empty? %>
 		<p class="lead">It looks like you haven't added any events yet.<br>
 		<%= link_to 'Head over to the Events page to tag along with your new friends!', events_path %></p>
 	<% end %>
-	<% current_user.events.each do |event| %>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-md-8">
-						<h3 class="panel-title"><%= event.name %></h3>
-					</div>
-					<div class="col-md-4 text-right">
-						<%= link_to event, class: "btn btn-primary btn-xs" do %>
-		          <div style="color:white"><%= event.name %> <i class="fa fa-arrow-right"></i></div>
-		        <% end %>
-					</div>
-				</div>
-			</div>
-		</div>
+	<% current_user.attendees.each do |attendee| %>
+		<%= attendee.event.inspect %>
 	<% end %>
-
 <% end %>

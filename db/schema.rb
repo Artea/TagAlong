@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208120022) do
+ActiveRecord::Schema.define(version: 20140209030913) do
+
+  create_table "attendees", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attendees_users", id: false, force: true do |t|
+    t.integer "attendee_id"
+    t.integer "user_id"
+  end
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -23,8 +33,10 @@ ActiveRecord::Schema.define(version: 20140208120022) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "user_bool"
+    t.integer  "attendee_id"
   end
 
+  add_index "events", ["attendee_id"], name: "index_events_on_attendee_id"
   add_index "events", ["user_bool"], name: "index_events_on_user_bool"
   add_index "events", ["user_id"], name: "index_events_on_user_id"
 
